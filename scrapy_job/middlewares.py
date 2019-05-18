@@ -5,7 +5,17 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+import random
 from scrapy import signals
+from .settings import USER_AGENTS
+
+
+
+class RandomUserAgentMIddleware(object):
+    def process_request(self, request, spider):
+
+        request.headers.setdefault("User-Agent", random.choice(USER_AGENTS))
+        return None
 
 
 class ScrapyJobSpiderMiddleware(object):
