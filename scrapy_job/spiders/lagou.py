@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from scrapy_job.items import JobItem
+from scrapy_job.items import BossJobItem
 
 
 class BossSpider(scrapy.Spider):
@@ -12,7 +12,7 @@ class BossSpider(scrapy.Spider):
         print(response.url)
         divlist = response.xpath("//div[@class=\"job-primary\"]")
         for div in divlist:
-            item = JobItem()
+            item = BossJobItem()
             item["name"] = div.xpath(".//div[@class=\"job-title\"]/text()").extract()[0]
             item["url"] = div.xpath(".//div[@class=\"info-primary\"]/h3[@class=\"name\"]/a/@href").extract()[0]
             item["url"] = "https://www.zhipin.com"+item["url"]
